@@ -1,0 +1,12 @@
+form {
+  display: inline-block;
+  font-size: 15px;
+  padding: 20px;
+  border: 2px;
+  border-color: darkblue;
+}
+
+.check {
+  display: inline-block;
+  width: 20%;
+}
