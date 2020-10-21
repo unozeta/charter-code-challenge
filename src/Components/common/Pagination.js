@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 
@@ -41,7 +42,8 @@ class Pagination extends Component {
   componentDidUpdate(prevProps) {
 
     if (prevProps.totalRecords !== this.props.totalRecords) {
-      this.totalPages = this.props.totalPages;
+      this.totalPages =  Math.ceil(this.props.totalRecords / this.props.pageLimit);
+
     };
 
   }
@@ -78,7 +80,6 @@ class Pagination extends Component {
 
   fetchPageNumbers = () => {
 
-    console.log(this);
     const totalPages = this.totalPages;
     const currentPage = this.state.currentPage;
     const pageNeighbours = this.pageNeighbours;
@@ -124,6 +125,7 @@ class Pagination extends Component {
   };
 
   render() {
+
     if (!this.totalRecords) return null;
 
     if (this.totalPages === 1) return null;

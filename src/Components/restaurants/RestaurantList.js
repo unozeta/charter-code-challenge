@@ -1,5 +1,4 @@
 import React from "react";
-import { render } from "react-dom";
 
 import Pagination from "../common/Pagination";
 
@@ -15,9 +14,6 @@ class RestaurantList extends React.Component {
     async componentDidUpdate(prevState) {
         const { restaurants } = this.props;
 
-        console.log(prevState.restaurants);
-        console.log(restaurants);
-
         if (prevState.restaurants !== restaurants) {
             await this.setState({ restaurants: restaurants });
             await this.resetList( 1, 10 );
@@ -28,24 +24,13 @@ class RestaurantList extends React.Component {
     resetList = (currentPage, pageLimit) => {
 
         const { restaurants } = this.state;
-
+        let totalPages = 0;
         let totalRecords = restaurants.length;
-        console.log(totalRecords);
-        console.log(pageLimit);
-        let totalPages = Math.ceil(totalRecords / pageLimit);
-        console.log(totalPages);
-
-        console.log(currentPage);
-        console.log(restaurants);
-    
+        totalPages = Math.ceil(totalRecords / pageLimit);  
         const offset = (currentPage - 1) * pageLimit;
         const currentRestaurants = restaurants.slice(offset, offset + pageLimit);
-        
-        console.log(currentRestaurants);
 
         this.setState({ currentPage, currentRestaurants, totalPages });
-
-        console.log(this.state);
 
       };
 
@@ -67,7 +52,9 @@ class RestaurantList extends React.Component {
             currentPage,
             totalPages
           } = this.state;
-          const totalRestaurants = restaurants.length;
+
+
+          let totalRestaurants = restaurants.length;
       
           if (totalRestaurants === 0) return <h4>No Results were found !!!</h4>;
       
@@ -94,7 +81,7 @@ class RestaurantList extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.currentRestaurants.map(restaurant => {
+                        {currentRestaurants.map(restaurant => {
                         return (
                             <tr key={restaurant.id}>
                             <td>{restaurant.name}</td>

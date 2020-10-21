@@ -1,5 +1,7 @@
+/* eslint-disable array-callback-return */
 import React from "react";
 import '../../Style/Filter.css';
+
 const createStatesList = (...args) => {
     var statesList = [];
     args.map(restaurant => {
@@ -51,8 +53,6 @@ class FiltersList extends React.Component {
 
     render(){
         const optionsList = this.props.optionsList;
-
-        console.log(optionsList);
 
         const checkboxItems = optionsList.map((option, index) => 
             <div className="check" key = {index}>
